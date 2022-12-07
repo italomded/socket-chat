@@ -15,7 +15,7 @@ public class CommandDispatcher implements Runnable {
     private final String CLIENT_CLOSED_LOG = "CLIENT CLOSED: %s";
     private final String UNEXPECTED_ERROR_LOG = "UNEXPECTED ERROR, MESSAGE: %s";
     private final String CREDITS_MESSAGE = "HELLO. CREATED BY <https://github.com/italomded/socket-chat>.";
-    private final String USERNAME_MESSAGAE = "YOUR CURRENT USERNAME IS %s";
+    private final String USERNAME_MESSAGE = "YOUR CURRENT USERNAME IS %s";
     private final String INVALID_COMMAND_MESSAGE = "INVALID COMMAND";
     private final String COMMAND_LOG_MESSAGE = "CLIENT USERNAME: %s | COMMAND: %s | SOCKET: %s";
     private static final List<Listener> commandListeners = Arrays.asList(
@@ -43,7 +43,7 @@ public class CommandDispatcher implements Runnable {
     @Override
     public void run() {
         clientContact.send(CREDITS_MESSAGE);
-        clientContact.send(String.format(USERNAME_MESSAGAE, clientContact.getUserName()));
+        clientContact.send(String.format(USERNAME_MESSAGE, clientContact.getUserName()));
         while (clientContact.getOnline().get() && clientContact.isReceiving()) {
             try {
                 String commandValue = clientContact.receive();

@@ -1,12 +1,8 @@
 package br.com.italomded.chat.contact;
 
-import br.com.italomded.chat.chat.Chat;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @EqualsAndHashCode

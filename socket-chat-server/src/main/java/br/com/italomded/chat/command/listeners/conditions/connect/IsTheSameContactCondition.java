@@ -7,7 +7,6 @@ public class IsTheSameContactCondition extends ListenerConnectCondition {
     @Override
     protected boolean check() {
         Contact contact = super.optionalContact.get();
-        System.out.println("helooo i am here");
         if (contact.equals(super.commandAuthor)) {
             commandAuthor.send(FAIL_MESSAGE);
             return false;

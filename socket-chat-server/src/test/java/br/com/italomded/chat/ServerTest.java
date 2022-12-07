@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
 public class ServerTest {
     private Server server;
     private final int port = 3000;
