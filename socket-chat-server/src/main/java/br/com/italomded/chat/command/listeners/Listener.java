@@ -5,7 +5,7 @@ import br.com.italomded.chat.command.Verb;
 import br.com.italomded.chat.contact.Contact;
 
 public abstract class Listener {
-    public void doAction(Command command, Contact commandAuthor) {
+    public synchronized void doAction(Command command, Contact commandAuthor) {
         if (getAttendVerb() == command.getVerb()) {
             whatDo(command.getValue(), commandAuthor);
         }

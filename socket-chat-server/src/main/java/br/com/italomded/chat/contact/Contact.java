@@ -17,16 +17,19 @@ public class Contact {
     private final Scanner clientResponse;
 
     @Getter
-    private String userName;
+    private volatile String userName;
     @Getter
     private AtomicBoolean online;
     @Getter
     private AtomicBoolean isChatting;
+    @Getter @Setter
+    private Connect actualConnection;
 
     public Contact(Socket socketClient) throws ContactCreationFailedException {
         userName = Integer.toString(socketClient.hashCode());
         online = new AtomicBoolean(true);
         isChatting = new AtomicBoolean(false);
+        actualConnection = null;
         try {
             responseToClient = new PrintStream(socketClient.getOutputStream());
             clientResponse = new Scanner(socketClient.getInputStream());
@@ -49,14 +52,22 @@ public class Contact {
     }
 
     public boolean isDisponible() {
-        if (online.get()) return false;
         if (isChatting.get()) return false;
+        if (actualConnection != null) return false;
+        if (!online.get()) return false;
         return true;
     }
 
     public boolean changeUserName(String userName) {
         if (Chat.getContact(userName).isPresent()) return false;
+        if (userName.isBlank()) return false;
         this.userName = userName;
         return true;
+    }
+
+    public boolean sendMessage(String message) {
+        if (isDisponible()) return false;
+        boolean sent = actualConnection.sendToOther(this, message);
+        return sent;
     }
 }

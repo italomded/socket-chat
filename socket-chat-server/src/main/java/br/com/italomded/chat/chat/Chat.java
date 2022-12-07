@@ -1,5 +1,6 @@
 package br.com.italomded.chat.chat;
 
+import br.com.italomded.chat.contact.Connect;
 import br.com.italomded.chat.contact.Contact;
 import br.com.italomded.chat.contact.ContactCreationFailedException;
 
@@ -15,13 +16,11 @@ public class Chat {
         return contactList.stream().filter(con -> con.getUserName().equals(userName)).findFirst();
     }
 
-    public static synchronized boolean createContact(Socket clientSocket) {
-        try {
-            Contact contact = new Contact(clientSocket);
-            contactList.add(contact);
-            return true;
-        } catch (ContactCreationFailedException e) {
-            return false;
-        }
+    public static boolean addContact(Contact clientContact) {
+        return contactList.add(clientContact);
+    }
+
+    public static boolean removeContact(Contact contact) {
+        return contactList.remove(contact);
     }
 }
